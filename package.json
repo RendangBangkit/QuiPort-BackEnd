@@ -1,0 +1,39 @@
+{
+  "name": "quiport-backend",
+  "version": "1.0.0",
+  "description": "Quick Report Application Backend For Mobile App (an application for citizen who can report an event, such as accident, surveliance, etc then analyze the picture using ML Models)",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint ./src",
+    "start": "nodemon ./src/server.js"
+  },
+  "keywords": [
+    "quiport",
+    "api",
+    "mobile",
+    "bakend",
+    "machine",
+    "learning",
+    "accidents"
+  ],
+  "author": "Bangkit B21-CAP0427",
+  "license": "ISC",
+  "dependencies": {
+    "@googlemaps/google-maps-services-js": "^3.1.16",
+    "body-parser": "^1.19.0",
+    "busboy": "^0.3.1",
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "firebase-admin": "^9.2.0",
+    "multer": "^1.4.2",
+    "request": "^2.88.2",
+    "uuid-v4": "^0.1.0"
+  },
+  "devDependencies": {
+    "eslint": "^7.27.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.23.3",
+    "nodemon": "^2.0.7"
+  }
+}
