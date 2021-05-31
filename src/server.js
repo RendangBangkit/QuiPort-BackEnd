@@ -35,8 +35,9 @@ app.post('/api/report', upload.single('image'), async (req, res) => {
     const myFile = req.file;
     const createdAt = Date.now();
     const updatedAt = createdAt;
+    const uid = uuid();
 
-    const imageUrl = await uploadImage(myFile, email, createdAt, uuid());
+    const imageUrl = await uploadImage(myFile, email, createdAt, uid);
 
     request({
       uri: `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${process.env.MAP_API_KEY}`,
@@ -50,6 +51,7 @@ app.post('/api/report', upload.single('image'), async (req, res) => {
         const country = result.address_components[6].long_name;
 
         const postData = {
+          uid,
           userId,
           email,
           address_components: {
