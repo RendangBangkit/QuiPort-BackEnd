@@ -1,7 +1,6 @@
 /* eslint-disable max-len */
 /* eslint-disable prefer-promise-reject-errors */
 const util = require('util');
-const uuid = require('uuid-v4');
 const firebase = require('../config');
 
 const storage = firebase.storage().bucket();
@@ -17,13 +16,13 @@ const storage = firebase.storage().bucket();
  *   "originalname" and "buffer" as keys
  */
 
-const uploadImage = (file, email, identity) => new Promise((resolve, reject) => {
+const uploadImage = (file, email, identity, uid) => new Promise((resolve, reject) => {
   const { originalname, buffer, mimetype } = file;
   const blob = storage.file(identity + originalname.replace(/ /g, '_'));
   const metadata = {
     metadata: {
       // This line is very important. It's to create a download token.
-      firebaseStorageDownloadTokens: uuid(),
+      firebaseStorageDownloadTokens: uid,
       author: email,
     },
     contentType: mimetype,

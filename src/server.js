@@ -6,10 +6,12 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const request = require('request');
-const firebase = require('./config');
 
+const uuid = require('uuid-v4');
 const upload = require('./helper/file');
 const { uploadImage, deleteImage } = require('./helper/storage');
+
+const firebase = require('./config');
 
 const app = express();
 
@@ -34,7 +36,7 @@ app.post('/api/report', upload.single('image'), async (req, res) => {
     const createdAt = Date.now();
     const updatedAt = createdAt;
 
-    const imageUrl = await uploadImage(myFile, email, createdAt);
+    const imageUrl = await uploadImage(myFile, email, createdAt, uuid());
 
     request({
       uri: `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${process.env.MAP_API_KEY}`,
