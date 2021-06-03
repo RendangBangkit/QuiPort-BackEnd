@@ -45,10 +45,12 @@ app.post('/api/report', upload.single('image'), async (req, res) => {
     }, async (error, response, body) => {
       if (!error && response.statusCode === 200) {
         const result = body.results[0];
+        const { length } = result.address_components;
         const address = result.formatted_address;
-        const city = result.address_components[4].long_name;
-        const province = result.address_components[5].long_name;
-        const country = result.address_components[6].long_name;
+        const city = result.address_components[length - 4].long_name;
+        const province = result.address_components[length - 3].long_name;
+        const country = result.address_components[length - 2].long_name;
+        const postalCode = result.address_components[length - 1].long_name;
 
         const postData = {
           uid,
@@ -59,6 +61,7 @@ app.post('/api/report', upload.single('image'), async (req, res) => {
             city,
             province,
             country,
+            postalCode,
             latitude,
             longitude,
           },
